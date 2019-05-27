@@ -1,0 +1,15 @@
+[run]
+source =
+    hold_em
+    tests
+branch = True
+omit =
+    hold_em/cli.py
+
+[report]
+exclude_lines =
+    no cov
+    no qa
+    noqa
+    pragma: no cover
+    if __name__ == .__main__.:
