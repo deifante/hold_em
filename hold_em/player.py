@@ -45,7 +45,6 @@ class Player:
 class PlayerRank:
     """Gets the rank of a player's hand"""
 
-
     def __init__(self, player: Player):
         """Creates a PlayerRank object for ranking the player hand
         :param player: Player the player whos hand will be ranked
