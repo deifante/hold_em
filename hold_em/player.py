@@ -17,7 +17,6 @@ class Player:
         if len(hole_cards) != 2:
             raise ValueError(f'Must have 2 and only 2 hole cards when creating a Player. {len(hole_cards)} hole cards passed.')
         self.hole_cards = hole_cards
-        print (f"setting hole cards {str(hole_cards[0])}, type: {type(hole_cards[0])}")
 
         if len(community_cards) != 5:
             raise ValueError(f'Must have 5 and only 5 community cards when creating a Player. {len(community_cards)} community cards passed.')
@@ -57,13 +56,12 @@ class PlayerRank:
         :returns: List[List[card.Card]] A list of possible hands."""
         five_card_combinations = []
         hole_cards = self.player.get_hole_cards()
-        print(f"hole cards:{hole_cards}")
         community_cards = self.player.get_community_cards()
         for comb in combinations(community_cards, 3):
             five_card_combinations.append(hole_cards + list(comb))
         return five_card_combinations
 
-    def rank(self) -> int:
+    def rank(self):
         hands = self.make_five()
         for hand in hands:
             card_hist = {}
@@ -72,6 +70,5 @@ class PlayerRank:
                     card_hist[card.get_rank()] += 1
                 else:
                     card_hist[card.get_rank()] = 1
-            print (f"hand:{str(hand)}\nhist:{str(card_hist)}\n")
-        return 0
+
 

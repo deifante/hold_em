@@ -4,14 +4,11 @@ from hold_em.player import Player, PlayerRank
 if __name__ == '__main__':
     card_parser = CardParser()
     community_cards = []
-    i = 0
     raw_community_cards = input('Please input community the cards:')
 
-    i = 0
     for card in raw_community_cards.split():
         community_cards.append(card_parser.parse(card))
         print (f"{str(community_cards[-1])}")
-        i += 1
 
     # A somewhat arbritrary maximum number of players.
     max_players = 20
@@ -30,7 +27,7 @@ if __name__ == '__main__':
             print(f'Player {i+1}: {players[-1]}')
             i += 1
     except EOFError:
-        print (f'End of player input.')
+        print ('End of player input.')
 
     print ("Ranking a player's hand")
     rank = PlayerRank(players[0])
