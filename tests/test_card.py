@@ -18,3 +18,8 @@ class TestCardParser:
         parsed_card = card_parser.parse('JS')
         assert expected_output == str(parsed_card)
 
+    def test_get_rank(self):
+        """Test getting the card rank"""
+        card = Card('Q', 'C')
+        assert 12 == card.get_rank()
+

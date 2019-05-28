@@ -1,5 +1,5 @@
 from hold_em.card import Card, CardParser
-from hold_em.player import Player
+from hold_em.player import Player, PlayerRank
 
 if __name__ == '__main__':
     card_parser = CardParser()
@@ -32,4 +32,7 @@ if __name__ == '__main__':
     except EOFError:
         print (f'End of player input.')
 
+    print ("Ranking a player's hand")
+    rank = PlayerRank(players[0])
+    rank.rank()
     print ('done')

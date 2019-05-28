@@ -30,6 +30,21 @@ class Card:
     face: chr
     suit: chr
 
+    ranks = {
+        '2': 2,
+        '3': 3,
+        '4': 4,
+        '5': 5,
+        '6': 6,
+        '7': 7,
+        '8': 8,
+        '9': 9,
+        'T': 10,
+        'J': 11,
+        'Q': 12,
+        'K': 13,
+        'A': 14
+    }
     def __repr__(self):
         """Produce debug output for a card"""
         return f"{self.face}, {self.suit}"
@@ -37,6 +52,11 @@ class Card:
     def __str__(self):
         """Produce human friendly output for a card"""
         return f"{FriendlyCard.faces[self.face]} of {FriendlyCard.suits[self.suit]}"
+
+    def get_rank(self) -> int:
+        """Get the card rank"""
+        return Card.ranks[self.face]
+
 
 class CardParser:
     """Creates cards from text input"""
