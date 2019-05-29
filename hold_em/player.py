@@ -23,8 +23,12 @@ class Player:
         self.community_cards = community_cards
         self.name = name
 
-    def __str__(self):
-        """Produces human friendly output for a player"""
+    def __str__(self) -> str:
+        """Produces human friendly output for a player.
+        :returns: A human friendly string representation of the player.
+            Describes the hole cards and the community cards.
+        :rtype: str
+        """
         community_cards = ''
         for card in self.community_cards[:-1]:
             community_cards += f" the {str(card)},"
@@ -33,27 +37,35 @@ class Player:
         return f"{self.name} holds the {self.hole_cards[0]} and the {self.hole_cards[1]} hole cards and holds {community_cards} as community cards."
 
     def get_hole_cards(self) -> List[Card]:
-        """Get the 2 hole cards for this player"""
+        """Get the 2 hole cards for this player.
+        :returns: The 2 hole cards for this player.
+        :rtype: List[Card]
+        """
         return self.hole_cards
 
     def get_community_cards(self) -> List[Card]:
-        """Get the community cards for this player"""
+        """Get the community cards for this player.
+        :returns: The community cards for this player.
+        :rtype: List[Card]
+        """
         return self.community_cards
 
 
 class PlayerRank:
-    """Gets the rank of a player's hand"""
+    """Gets the rank of a player's hand."""
 
     def __init__(self, player: Player):
-        """Creates a PlayerRank object for ranking the player hand
-        :param player: Player the player whos hand will be ranked
+        """Creates a PlayerRank object for ranking the player hand.
+        :param player: Player the player whos hand will be ranked.
         :type player: Player
         """
         self.player = player
 
     def make_five(self) -> List[List[Card]]:
-        """Makes all the 5 card hands this player can have
-        :returns: List[List[card.Card]] A list of possible hands."""
+        """Makes all the 5 card hands this player can have.
+        :returns: A list of possible hands.
+        :rtype: List[List[card.Card]]
+        """
         five_card_combinations = []
         hole_cards = self.player.get_hole_cards()
         community_cards = self.player.get_community_cards()
