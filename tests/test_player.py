@@ -1,5 +1,5 @@
 from hold_em.card import Card, CardParser
-from hold_em.player import Player, PlayerRank
+from hold_em.player import Player, PlayerRank, make_histogram
 
 import pytest
 
@@ -50,7 +50,7 @@ class TestPlayerRank:
 
     def test_constructor(self, karen_player: Player):
         """Test the creation of a PlayerRank object"""
-        karen_rank = PlayerRank(karen_player)        
+        karen_rank = PlayerRank(karen_player)
         assert isinstance(karen_rank, PlayerRank)
 
     def test_make_five(self, karen_player: Player):
@@ -80,3 +80,25 @@ class TestPlayerRank:
             [ad, qc, fh, tc, ed],
         ]
         assert expected_hands == karen_hands
+
+def test_make_histogram():
+    """Test creating a Card rank based histogram from a list of Cards"""
+    hand = [
+        Card('2', 'C'),
+        Card('3', 'D'),
+        Card('T', 'D'),
+        Card('A', 'S'),
+        Card('Q', 'H'),
+        Card('2', 'H'),
+        Card('Q', 'D'),
+        Card('Q', 'S'),
+        Card('Q', 'C')
+    ]
+    expected_histogram = {
+        2:2,
+        3:1,
+        10:1,
+        14:1,
+        12:4
+    }
+    assert expected_histogram == make_histogram(hand)

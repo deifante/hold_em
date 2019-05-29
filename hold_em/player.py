@@ -20,7 +20,7 @@ class Player:
 
         if len(community_cards) != 5:
             raise ValueError(f'Must have 5 and only 5 community cards when creating a Player. {len(community_cards)} community cards passed.')
-        self.community_cards = community_cards            
+        self.community_cards = community_cards
         self.name = name
 
     def __str__(self):
@@ -64,11 +64,20 @@ class PlayerRank:
     def rank(self):
         hands = self.make_five()
         for hand in hands:
-            card_hist = {}
+            card_hist = make_histogram(hand)
+
             for card in hand:
                 if card.get_rank() in card_hist:
                     card_hist[card.get_rank()] += 1
                 else:
                     card_hist[card.get_rank()] = 1
 
-
+def make_histogram(hand: List[Card]) -> List[int]:
+    """Create a histogram based on card rank"""
+    histogram = {}
+    for card in hand:
+        if card.get_rank() in histogram:
+            histogram[card.get_rank()] += 1
+        else:
+            histogram[card.get_rank()] = 1
+    return histogram
