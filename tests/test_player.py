@@ -84,21 +84,21 @@ class TestPlayerRank:
 def test_make_histogram():
     """Test creating a Card rank based histogram from a list of Cards"""
     hand = [
+        Card('Q', 'D'),
         Card('2', 'C'),
-        Card('3', 'D'),
         Card('T', 'D'),
+        Card('Q', 'S'),
         Card('A', 'S'),
         Card('Q', 'H'),
-        Card('2', 'H'),
-        Card('Q', 'D'),
-        Card('Q', 'S'),
-        Card('Q', 'C')
+        Card('3', 'D'),
+        Card('Q', 'C'),
+        Card('2', 'H')
     ]
     expected_histogram = {
-        2:2,
-        3:1,
-        10:1,
         14:1,
-        12:4
+        12:4,
+        10:1,
+        3:1,
+        2:2,
     }
     assert expected_histogram == make_histogram(hand)

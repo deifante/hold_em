@@ -73,11 +73,19 @@ class PlayerRank:
                     card_hist[card.get_rank()] = 1
 
 def make_histogram(hand: List[Card]) -> List[int]:
-    """Create a histogram based on card rank"""
+    """Create a histogram based on card rank
+    :param hand: The list of cards that we will create the histogram from.
+    :type hand: List[Card]
+    :returns: A histogram of the cards based on their rank. Sorted with the
+        highest rank first.
+    :rtype: List[int]
+    """
     histogram = {}
     for card in hand:
         if card.get_rank() in histogram:
             histogram[card.get_rank()] += 1
         else:
             histogram[card.get_rank()] = 1
-    return histogram
+
+    sorted_histogram = {k: histogram[k] for k in sorted(histogram, reverse = True)}
+    return sorted_histogram
