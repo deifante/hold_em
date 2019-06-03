@@ -1,7 +1,9 @@
 from typing import List
 from itertools import combinations
+from operator import methodcaller
 
 from hold_em.card import Card
+from hold_em.hand import Hand
 
 class Player:
     """Represents a player of texas hold em"""
@@ -50,54 +52,21 @@ class Player:
         """
         return self.community_cards
 
-
-class PlayerRank:
-    """Gets the rank of a player's hand."""
-
-    def __init__(self, player: Player):
-        """Creates a PlayerRank object for ranking the player hand.
-        :param player: Player the player whos hand will be ranked.
-        :type player: Player
-        """
-        self.player = player
-
     def make_five(self) -> List[List[Card]]:
         """Makes all the 5 card hands this player can have.
         :returns: A list of possible hands.
         :rtype: List[List[card.Card]]
         """
         five_card_combinations = []
-        hole_cards = self.player.get_hole_cards()
-        community_cards = self.player.get_community_cards()
-        for comb in combinations(community_cards, 3):
-            five_card_combinations.append(hole_cards + list(comb))
+        for comb in combinations(self.community_cards, 3):
+            five_card_combinations.append(self.hole_cards + list(comb))
         return five_card_combinations
 
-    def rank(self):
-        hands = self.make_five()
-        for hand in hands:
-            card_hist = make_histogram(hand)
-
-            for card in hand:
-                if card.get_rank() in card_hist:
-                    card_hist[card.get_rank()] += 1
-                else:
-                    card_hist[card.get_rank()] = 1
-
-def make_histogram(hand: List[Card]) -> List[int]:
-    """Create a histogram based on card rank
-    :param hand: The list of cards that we will create the histogram from.
-    :type hand: List[Card]
-    :returns: A histogram of the cards based on their rank. Sorted with the
-        highest rank first.
-    :rtype: List[int]
-    """
-    histogram = {}
-    for card in hand:
-        if card.get_rank() in histogram:
-            histogram[card.get_rank()] += 1
-        else:
-            histogram[card.get_rank()] = 1
-
-    sorted_histogram = {k: histogram[k] for k in sorted(histogram, reverse = True)}
-    return sorted_histogram
+    def get_best_hand(self) -> Hand:
+        """Gets the best hand this player can play.
+        :returns: A hand representing the best cards this player has.
+        :rtype: Hand
+        """
+        hands = [Hand(hand) for hand in self.make_five()]
+        sorted_hands = sorted(hands, key=methodcaller('get_rank'), reverse=True)
+        return sorted_hands[0]

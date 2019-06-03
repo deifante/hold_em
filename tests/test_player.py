@@ -1,7 +1,8 @@
-from hold_em.card import Card, CardParser
-from hold_em.player import Player, PlayerRank, make_histogram
-
 import pytest
+
+from hold_em.card import Card, CardParser
+from hold_em.player import Player
+from hold_em.hand import Hand
 
 @pytest.fixture()
 def karen_player() -> Player:
@@ -18,6 +19,23 @@ def karen_player() -> Player:
     ]
     player = Player('Karen', hole_cards, community_cards)
     return player
+
+@pytest.fixture()
+def tracey_player() -> Player:
+    hole_cards = [
+            Card('A', 'D'),
+            Card('K', 'C')
+        ]
+    community_cards = [
+        Card('Q', 'S'),
+        Card('J', 'D'),
+        Card('5', 'H'),
+        Card('T', 'C'),
+        Card('8', 'D')
+    ]
+    player = Player('Tracey', hole_cards, community_cards)
+    return player
+
 
 class TestPlayer:
     """Tests the Player class"""
@@ -45,18 +63,11 @@ class TestPlayer:
         ]
         assert community_cards == karen_player.get_community_cards()
 
-class TestPlayerRank:
-    """Tests the ranking of a player"""
-
-    def test_constructor(self, karen_player: Player):
-        """Test the creation of a PlayerRank object"""
-        karen_rank = PlayerRank(karen_player)
-        assert isinstance(karen_rank, PlayerRank)
-
     def test_make_five(self, karen_player: Player):
         """Test creating all the combinations of hands a player can have"""
-        karen_rank = PlayerRank(karen_player)
-        karen_hands = karen_rank.make_five()
+        # karen_rank = PlayerRank(karen_player)
+        # karen_hands = karen_rank.make_five()
+        karen_hands = karen_player.make_five()
         # Hole Cards
         ad = Card('A', 'D')
         qc = Card('Q', 'C')
@@ -81,24 +92,14 @@ class TestPlayerRank:
         ]
         assert expected_hands == karen_hands
 
-def test_make_histogram():
-    """Test creating a Card rank based histogram from a list of Cards"""
-    hand = [
-        Card('Q', 'D'),
-        Card('2', 'C'),
-        Card('T', 'D'),
-        Card('Q', 'S'),
-        Card('A', 'S'),
-        Card('Q', 'H'),
-        Card('3', 'D'),
-        Card('Q', 'C'),
-        Card('2', 'H')
-    ]
-    expected_histogram = {
-        14:1,
-        12:4,
-        10:1,
-        3:1,
-        2:2,
-    }
-    assert expected_histogram == make_histogram(hand)
+    def test_get_best_hand(self, tracey_player: Player):
+        """Test getting the best hand a player can play"""
+        expected_hand = Hand([
+            Card('A', 'D'),
+            Card('K', 'C'),
+            Card('Q', 'S'),
+            Card('J', 'D'),
+            Card('T', 'C')
+        ])
+
+        assert expected_hand == tracey_player.get_best_hand()

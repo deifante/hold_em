@@ -1,5 +1,7 @@
+from operator import itemgetter
+
 from hold_em.card import Card, CardParser
-from hold_em.player import Player, PlayerRank
+from hold_em.player import Player
 
 if __name__ == '__main__':
     card_parser = CardParser()
@@ -29,7 +31,25 @@ if __name__ == '__main__':
     except EOFError:
         print ('End of player input.')
 
-    print ("Ranking a player's hand")
-    rank = PlayerRank(players[0])
-    rank.rank()
+    best_hands = []
+    for player in players:
+        #todo: multiple players with the same name.
+        print(f'Getting best hand for {player.name}')
+        best_hand = player.get_best_hand()
+        print(f'Best hand:{best_hand}')
+        best_hands.append(
+            (
+                player.name,
+                best_hand,
+                best_hand.get_rank(),
+                best_hand.get_high_card_in_hand_rank(),
+                best_hand.get_high_kicker_card_rank()
+            )
+        )
+    print(f'best hand tuples: {best_hands}')
+    sorted_players = sorted(best_hands, key=itemgetter(2,3,4), reverse=True)
+    i = 1
+    for player in sorted_players:
+        print(f'{i} {player[0]} {str(player[1])}')
+        i += 1
     print ('done')
