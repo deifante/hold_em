@@ -1,50 +1,50 @@
 from dataclasses import dataclass, field
 
+
 class FriendlyCard:
     """Assists in creating human friendly output for Card objects"""
+
     faces = {
-        '2': 'Two',
-        '3': 'Three',
-        '4': 'Four',
-        '5': 'Five',
-        '6': 'Six',
-        '7': 'Seven',
-        '8': 'Eight',
-        '9': 'Nine',
-        'T': 'Ten',
-        'J': 'Jack',
-        'Q': 'Queen',
-        'K': 'King',
-        'A': 'Ace',
+        "2": "Two",
+        "3": "Three",
+        "4": "Four",
+        "5": "Five",
+        "6": "Six",
+        "7": "Seven",
+        "8": "Eight",
+        "9": "Nine",
+        "T": "Ten",
+        "J": "Jack",
+        "Q": "Queen",
+        "K": "King",
+        "A": "Ace",
     }
-    suits = {
-        'H': 'Hearts',
-        'S': 'Spades',
-        'D': 'Diamonds',
-        'C': 'Clubs'
-    }
+    suits = {"H": "Hearts", "S": "Spades", "D": "Diamonds", "C": "Clubs"}
+
 
 @dataclass(order=True)
 class Card:
     """A class representing a playing card"""
+
     face: chr
     suit: chr
 
     ranks = {
-        '2': 2,
-        '3': 3,
-        '4': 4,
-        '5': 5,
-        '6': 6,
-        '7': 7,
-        '8': 8,
-        '9': 9,
-        'T': 10,
-        'J': 11,
-        'Q': 12,
-        'K': 13,
-        'A': 14
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 6,
+        "7": 7,
+        "8": 8,
+        "9": 9,
+        "T": 10,
+        "J": 11,
+        "Q": 12,
+        "K": 13,
+        "A": 14,
     }
+
     def __repr__(self) -> str:
         """Produce debug output for a card.
         :returns: Debug output for a card.

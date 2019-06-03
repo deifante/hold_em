@@ -5,6 +5,7 @@ from operator import methodcaller
 from hold_em.card import Card
 from hold_em.hand import Hand
 
+
 class Player:
     """Represents a player of texas hold em"""
 
@@ -17,11 +18,15 @@ class Player:
         :raises: ValueError
         """
         if len(hole_cards) != 2:
-            raise ValueError(f'Must have 2 and only 2 hole cards when creating a Player. {len(hole_cards)} hole cards passed.')
+            raise ValueError(
+                f"Must have 2 and only 2 hole cards when creating a Player. {len(hole_cards)} hole cards passed."
+            )
         self.hole_cards = hole_cards
 
         if len(community_cards) != 5:
-            raise ValueError(f'Must have 5 and only 5 community cards when creating a Player. {len(community_cards)} community cards passed.')
+            raise ValueError(
+                f"Must have 5 and only 5 community cards when creating a Player. {len(community_cards)} community cards passed."
+            )
         self.community_cards = community_cards
         self.name = name
 
@@ -31,10 +36,12 @@ class Player:
             Describes the hole cards and the community cards.
         :rtype: str
         """
-        community_cards = ''
+        community_cards = ""
         for card in self.community_cards[:-1]:
             community_cards += f" the {str(card)},"
-        community_cards = f"{community_cards[:-2]} and the {str(self.community_cards[-1])}"
+        community_cards = (
+            f"{community_cards[:-2]} and the {str(self.community_cards[-1])}"
+        )
         community_cards = community_cards.strip()
         return f"{self.name} holds the {self.hole_cards[0]} and the {self.hole_cards[1]} hole cards and holds {community_cards} as community cards."
 
@@ -68,5 +75,5 @@ class Player:
         :rtype: Hand
         """
         hands = [Hand(hand) for hand in self.make_five()]
-        sorted_hands = sorted(hands, key=methodcaller('get_rank'), reverse=True)
+        sorted_hands = sorted(hands, key=methodcaller("get_rank"), reverse=True)
         return sorted_hands[0]

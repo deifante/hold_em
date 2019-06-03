@@ -4,36 +4,32 @@ from hold_em.card import Card, CardParser
 from hold_em.player import Player
 from hold_em.hand import Hand
 
+
 @pytest.fixture()
 def karen_player() -> Player:
-    hole_cards = [
-            Card('A', 'D'),
-            Card('Q', 'C')
-        ]
+    hole_cards = [Card("A", "D"), Card("Q", "C")]
     community_cards = [
-        Card('2', 'S'),
-        Card('4', 'D'),
-        Card('5', 'H'),
-        Card('T', 'C'),
-        Card('8', 'D')
+        Card("2", "S"),
+        Card("4", "D"),
+        Card("5", "H"),
+        Card("T", "C"),
+        Card("8", "D"),
     ]
-    player = Player('Karen', hole_cards, community_cards)
+    player = Player("Karen", hole_cards, community_cards)
     return player
+
 
 @pytest.fixture()
 def tracey_player() -> Player:
-    hole_cards = [
-            Card('A', 'D'),
-            Card('K', 'C')
-        ]
+    hole_cards = [Card("A", "D"), Card("K", "C")]
     community_cards = [
-        Card('Q', 'S'),
-        Card('J', 'D'),
-        Card('5', 'H'),
-        Card('T', 'C'),
-        Card('8', 'D')
+        Card("Q", "S"),
+        Card("J", "D"),
+        Card("5", "H"),
+        Card("T", "C"),
+        Card("8", "D"),
     ]
-    player = Player('Tracey', hole_cards, community_cards)
+    player = Player("Tracey", hole_cards, community_cards)
     return player
 
 
@@ -46,20 +42,17 @@ class TestPlayer:
 
     def test_get_hole_cards(self, karen_player: Player):
         """Test getting hole cards from a player"""
-        hole_cards = [
-            Card('A', 'D'),
-            Card('Q', 'C')
-        ]
+        hole_cards = [Card("A", "D"), Card("Q", "C")]
         assert hole_cards == karen_player.get_hole_cards()
 
     def test_get_community_cards(self, karen_player: Player):
         """Tests getting the community cards from a player"""
         community_cards = [
-            Card('2', 'S'),
-            Card('4', 'D'),
-            Card('5', 'H'),
-            Card('T', 'C'),
-            Card('8', 'D')
+            Card("2", "S"),
+            Card("4", "D"),
+            Card("5", "H"),
+            Card("T", "C"),
+            Card("8", "D"),
         ]
         assert community_cards == karen_player.get_community_cards()
 
@@ -69,14 +62,14 @@ class TestPlayer:
         # karen_hands = karen_rank.make_five()
         karen_hands = karen_player.make_five()
         # Hole Cards
-        ad = Card('A', 'D')
-        qc = Card('Q', 'C')
+        ad = Card("A", "D")
+        qc = Card("Q", "C")
         # Community Cards
-        ts = Card('2', 'S')
-        fd = Card('4', 'D')
-        fh = Card('5', 'H')
-        tc = Card('T', 'C')
-        ed = Card('8', 'D')
+        ts = Card("2", "S")
+        fd = Card("4", "D")
+        fh = Card("5", "H")
+        tc = Card("T", "C")
+        ed = Card("8", "D")
 
         expected_hands = [
             [ad, qc, ts, fd, fh],
@@ -94,12 +87,14 @@ class TestPlayer:
 
     def test_get_best_hand(self, tracey_player: Player):
         """Test getting the best hand a player can play"""
-        expected_hand = Hand([
-            Card('A', 'D'),
-            Card('K', 'C'),
-            Card('Q', 'S'),
-            Card('J', 'D'),
-            Card('T', 'C')
-        ])
+        expected_hand = Hand(
+            [
+                Card("A", "D"),
+                Card("K", "C"),
+                Card("Q", "S"),
+                Card("J", "D"),
+                Card("T", "C"),
+            ]
+        )
 
         assert expected_hand == tracey_player.get_best_hand()
