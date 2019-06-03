@@ -41,7 +41,7 @@ class TestHand:
         assert Hand.hand_ranks['straight flush'] == hand.get_rank()
         assert 14 == hand.get_high_card_in_hand_rank()
         assert 14 == hand.get_high_kicker_card_rank()
-        
+
         hand = Hand(test_hands['four of a kind'])
         assert Hand.hand_ranks['four of a kind'] == hand.get_rank()
         assert 7 == hand.get_high_card_in_hand_rank()
@@ -81,12 +81,12 @@ class TestHand:
         assert Hand.hand_ranks['pair'] == hand.get_rank()
         assert 3 == hand.get_high_card_in_hand_rank()
         assert 7 == hand.get_high_kicker_card_rank()
-        
+
         hand = Hand(test_hands['high card'])
         assert Hand.hand_ranks['high card'] == hand.get_rank()
         assert 12 == hand.get_high_card_in_hand_rank()
         assert 12 == hand.get_high_kicker_card_rank()
-        
+
 def test_make_histogram():
     """Test creating a Card rank based histogram from a list of Cards"""
     hand = [
