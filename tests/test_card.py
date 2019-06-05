@@ -1,3 +1,5 @@
+import pytest
+
 from hold_em.card import Card, CardParser
 from hold_em.player import Player
 
@@ -23,3 +25,10 @@ class TestCardParser:
         """Test getting the card rank"""
         card = Card("Q", "C")
         assert 12 == card.get_rank()
+
+    def test_parse_invalid_card(self):
+        """Test parsing an invalid card"""
+        card_parser = CardParser()
+        with pytest.raises(KeyError):
+            card_parser.parse("SH")
+

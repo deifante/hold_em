@@ -78,4 +78,8 @@ class CardParser:
         :returns: A single Card object.
         :rtype: Card
         """
+        if card[0] not in FriendlyCard.faces:
+            raise KeyError(card[0])
+        if card[1] not in FriendlyCard.suits:
+            raise KeyError(card[1])
         return Card(card[0], card[1])
