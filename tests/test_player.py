@@ -58,8 +58,6 @@ class TestPlayer:
 
     def test_make_five(self, karen_player: Player):
         """Test creating all the combinations of hands a player can have"""
-        # karen_rank = PlayerRank(karen_player)
-        # karen_hands = karen_rank.make_five()
         karen_hands = karen_player.make_five()
         # Hole Cards
         ad = Card("A", "D")
