@@ -11,7 +11,6 @@ if __name__ == "__main__":
     try:
         for card in raw_community_cards.split():
             community_cards.append(card_parser.parse(card))
-            print(f"{str(community_cards[-1])}")
     except KeyError as err:
         help_text = (
             "Community cards are 2 letters. The first is the rank. This must be"
@@ -33,10 +32,8 @@ if __name__ == "__main__":
                 print("End of player input.")
                 break
             player_name, *player_cards = raw_player.strip().split()
-            print(f"player name:{player_name}, player cards:{player_cards}")
             player_cards = [card_parser.parse(c) for c in player_cards[:2]]
             players.append(Player(player_name, player_cards, community_cards))
-            print(f"Player {i+1}: {players[-1]}")
             i += 1
     except EOFError:
         print("End of player input.")
@@ -44,9 +41,7 @@ if __name__ == "__main__":
     best_hands = []
     for player in players:
         # todo: multiple players with the same name.
-        print(f"Getting best hand for {player.name}")
         best_hand = player.get_best_hand()
-        print(f"Best hand:{best_hand}")
         best_hands.append(
             (
                 player.name,
@@ -56,7 +51,6 @@ if __name__ == "__main__":
                 best_hand.get_high_kicker_card_rank(),
             )
         )
-    print(f"best hand tuples: {best_hands}")
     sorted_players = sorted(best_hands, key=itemgetter(2, 3, 4), reverse=True)
     i = 1
     for player in sorted_players:
