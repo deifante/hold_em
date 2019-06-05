@@ -6,19 +6,25 @@ from hold_em.player import Player
 if __name__ == "__main__":
     card_parser = CardParser()
     community_cards = []
+    card_help_text = (
+        "Cards are 2 letters. The first is the rank. This must be one of A, Q,"
+        " K, J, T, 9, 8, 7, 6, 5, 4, 3 or 2. The second letter is the suit. It"
+        " must be one of D, C, H, S. Example:\nKS AD 3H 7C TD"
+    )
+    community_card_help = "There must be five and only five community cards."
+    player_card_help = (
+        "A player must have a unique name and two cards. Example:\nBecky JD QC"
+    )
     raw_community_cards = input("Please input community the cards:")
 
     try:
         for card in raw_community_cards.split():
             community_cards.append(card_parser.parse(card))
     except KeyError as err:
-        help_text = (
-            "Community cards are 2 letters. The first is the rank. This must be"
-            " one of A, Q, K, J, T, 9, 8, 7, 6, 5, 4, 3 or 2. The second letter"
-            " is the suit. It must be one of D, C, H, S. There must be five and"
-            " only five community cards."
+        print(
+            f"Invalid character, {err} entered for card, {card}."
+            f"\n{card_help_text}\n{community_card_help}"
         )
-        print(f"Invalid character, {err} entered for card, {card}.\n{help_text}")
         exit()
 
     # A somewhat arbritrary maximum number of players.
@@ -37,6 +43,12 @@ if __name__ == "__main__":
             i += 1
     except EOFError:
         print("End of player input.")
+    except KeyError as err:
+        help_text = ()
+        print(
+            f"Invalid character, {err} entered for player, ({raw_player})."
+            f"\n{card_help_text}\n{player_card_help}"
+        )
 
     best_hands = []
     for player in players:
