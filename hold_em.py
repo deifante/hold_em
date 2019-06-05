@@ -9,9 +9,11 @@ if __name__ == "__main__":
     card_help_text = (
         "Cards are 2 letters. The first is the rank. This must be one of A, Q,"
         " K, J, T, 9, 8, 7, 6, 5, 4, 3 or 2. The second letter is the suit. It"
-        " must be one of D, C, H, S. Example:\nKS AD 3H 7C TD"
+        " must be one of D, C, H, S."
     )
-    community_card_help = "There must be five and only five community cards."
+    community_card_help = (
+        "There must be five and only five community cards. Example:\nKS AD 3H 7C TD"
+    )
     player_card_help = (
         "A player must have a unique name and two cards. Example:\nBecky JD QC"
     )
@@ -44,11 +46,14 @@ if __name__ == "__main__":
     except EOFError:
         print("End of player input.")
     except KeyError as err:
-        help_text = ()
         print(
             f"Invalid character, {err} entered for player, ({raw_player})."
             f"\n{card_help_text}\n{player_card_help}"
         )
+        exit()
+    except ValueError as err:
+        print(err)
+        exit()
 
     best_hands = []
     for player in players:

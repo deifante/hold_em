@@ -40,6 +40,23 @@ class TestPlayer:
         """Test the creation of a player"""
         assert isinstance(karen_player, Player)
 
+    def test_constructor_too_many_community_cards(self):
+        """Tests that an exception is thrown when an incorrect number of
+        community cards are passed to the constructor.
+        """
+        hole_cards = [Card("7", "D"), Card("3", "C")]
+        community_cards = [
+            Card("Q", "S"),
+            Card("J", "D"),
+            Card("5", "H"),
+            Card("T", "C"),
+            Card("8", "D"),
+            Card("2", "D"),
+            Card("4", "D"),
+        ]
+        with pytest.raises(ValueError):
+            Player("Becky", hole_cards, community_cards)
+
     def test_get_hole_cards(self, karen_player: Player):
         """Test getting hole cards from a player"""
         hole_cards = [Card("A", "D"), Card("Q", "C")]
