@@ -1,9 +1,10 @@
+from typing import Dict, List
+
 import pytest
-from typing import List, Dict
 
 from hold_em.card import Card
-from hold_em.player import Player
 from hold_em.hand import Hand, make_histogram
+from hold_em.player import Player
 
 
 @pytest.fixture()

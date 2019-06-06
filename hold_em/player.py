@@ -1,6 +1,6 @@
-from typing import List
 from itertools import combinations
 from operator import methodcaller
+from typing import List
 
 from hold_em.card import Card
 from hold_em.hand import Hand

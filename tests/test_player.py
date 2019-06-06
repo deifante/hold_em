@@ -1,8 +1,8 @@
 import pytest
 
 from hold_em.card import Card, CardParser
-from hold_em.player import Player
 from hold_em.hand import Hand
+from hold_em.player import Player
 
 
 @pytest.fixture()

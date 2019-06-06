@@ -1,5 +1,5 @@
-from typing import List
 from operator import methodcaller
+from typing import List
 
 from hold_em.card import Card, FriendlyCard
 
