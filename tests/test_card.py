@@ -31,4 +31,3 @@ class TestCardParser:
         card_parser = CardParser()
         with pytest.raises(KeyError):
             card_parser.parse("SH")
-
