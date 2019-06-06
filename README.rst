@@ -3,19 +3,18 @@ hold_em
 
 -----
 
-.. contents:: **Table of Contents**
-    :backlinks: none
+- Running
+
+.. code-block:: bash
+
+    $ python3 ./hold_em.py < ./sample_input/sample_input.txt
 
 Installation
 ------------
 
-hold_em is distributed on `PyPI <https://pypi.org>`_ as a universal
-wheel and is available on Linux/macOS and Windows and supports
-Python 2.7/3.5+ and PyPy.
-
 .. code-block:: bash
 
-    $ pip install hold_em
+    $ pip install -r requirements.txt
 
 License
 -------
