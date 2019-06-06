@@ -57,7 +57,6 @@ if __name__ == "__main__":
 
     best_hands = []
     for player in players:
-        # todo: multiple players with the same name.
         best_hand = player.get_best_hand()
         best_hands.append(
             (
