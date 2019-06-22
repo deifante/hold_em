@@ -65,8 +65,8 @@ class Player:
         :rtype: List[List[card.Card]]
         """
         five_card_combinations = []
-        for comb in combinations(self.community_cards, 3):
-            five_card_combinations.append(self.hole_cards + list(comb))
+        for comb in combinations(self.community_cards + self.hole_cards, 5):
+            five_card_combinations.append(list(comb))
         return five_card_combinations
 
     def get_best_hand(self) -> Hand:
